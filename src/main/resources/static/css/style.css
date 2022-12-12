@@ -1,0 +1,8 @@
+body{
+    font-family: 'Lato', sans-serif;
+    background-color: white;
+}
+
+div.divider {
+    border-top: 3px solid #bbb;
+  }
