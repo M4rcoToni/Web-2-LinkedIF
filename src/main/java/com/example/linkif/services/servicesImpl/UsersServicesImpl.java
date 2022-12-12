@@ -29,7 +29,7 @@ public class UsersServicesImpl implements UsersServices {
 	@Override
 	public UserModel save(UserModel user) {
 		// TODO Auto-generated method stub
-		return null;
+		return repository.save(user);
 	}
 
 	@Override

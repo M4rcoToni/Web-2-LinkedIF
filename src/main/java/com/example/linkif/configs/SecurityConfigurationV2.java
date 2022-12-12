@@ -19,8 +19,8 @@ public class SecurityConfigurationV2 {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers().permitAll()
-
+                .antMatchers(HttpMethod.GET, "/cadastro").permitAll()
+                .antMatchers(HttpMethod.POST, "/cadastro").permitAll()
                 .antMatchers(HttpMethod.GET, "/index").hasRole("ADMIN")
                 .antMatchers(HttpMethod.GET, "/save").hasRole("USER") // hasAnyRole
                 .antMatchers(HttpMethod.POST, "/save").hasRole("ADMIN") // hasAnyRole

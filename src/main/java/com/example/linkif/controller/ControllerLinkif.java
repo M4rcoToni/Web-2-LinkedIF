@@ -37,6 +37,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.linkif.repository.VagaRepository;
+import com.example.linkif.model.UserModel;
 import com.example.linkif.repository.UserRepository;
 import com.fasterxml.jackson.databind.introspect.TypeResolutionContext.Empty;
 
@@ -51,7 +52,7 @@ public class ControllerLinkif {
     UserRepository repositoryUser;
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public ModelAndView login() {
+    public ModelAndView Login() {
         ModelAndView mv = new ModelAndView("home");
 
         // List<Categorias> categorias = repositoryCar.findAll();
@@ -60,6 +61,26 @@ public class ControllerLinkif {
         return mv;
     }
 
+    @RequestMapping(value = "/cadastro", method = RequestMethod.GET)
+    public String Cadastro() {
+
+        // List<Categorias> categorias = repositoryCar.findAll();
+        // mv.addObject("categorias", categorias);
+
+        return "/cadastro";
+    }
+
+    @RequestMapping(value = "/cadastro", method = RequestMethod.POST)
+    public String savePost(@Valid UserModel user, BindingResult result, RedirectAttributes attributes) {
+        if (result.hasErrors()) {
+            System.out.println(result);
+            attributes.addFlashAttribute("mensagem", "Verifique os campos!");
+            return "redirect:/save";
+
+        }
+        repositoryUser.save(user);
+        return "redirect:/index";
+    }
     // // @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     // @RequestMapping(value = "/index", method = RequestMethod.GET)
     // public ModelAndView getGetCategoria() {

@@ -16,8 +16,11 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import net.bytebuddy.implementation.bind.annotation.Default;
 
 @Entity
 @Table(name = "TB_USER")
@@ -32,20 +35,19 @@ public class UserModel implements UserDetails, Serializable {
   @Column(nullable = false)
   private String password;
 
-  @NotBlank
+  private String nome;
+
   private String cidade;
 
-  @NotBlank
   private String regiao;
 
-  @NotNull
+  @Value("0")
   private int idade;
 
-  @NotBlank
-  private String telefone;
-
-  @NotNull
+  @Value("0")
   private int cnpjoucpf;
+
+  private String telefone;
 
   private String imagem;
 
@@ -57,9 +59,6 @@ public class UserModel implements UserDetails, Serializable {
   public Collection<? extends GrantedAuthority> getAuthorities() {
     return this.roles;
   }
-
-  @NotBlank
-  private String nome;
 
   public String getNome() {
     return nome;
