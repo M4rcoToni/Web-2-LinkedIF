@@ -1,0 +1,45 @@
+<form class="collapse sign-in-form hero-cta-form" id="userComumId" method="post" novalidate
+  data-js-module-id="d2l-sign-in-form" th:fragment="formcomum">
+  <div class="alert hidden" role="alert" tabindex="-1">
+    <div class="wrapper">
+      <p class="alert-content">
+        <th:block th:include="mensagemValidacao"></th:block>
+      </p>
+    </div>
+  </div>
+  <div class="sign-in-form__form-input-container">
+    <!-- INPUTS DE COMUM -->
+    <div class=" input   mx-auto">
+      <div class="input">
+        <input class="input__input" required="true" id="username" name="username" placeholder=" " type="text">
+        <label class="input__label" for="username">Email</label>
+      </div>
+      <div class="input ">
+        <input class="input__input" required="true" id="password" name="password" placeholder=" " type="password">
+        <label class="input__label" for="password">Senha</label>
+      </div>
+      <div class="input ">
+        <input class="input__input" required="true" id="Nome" name="Nome" placeholder=" " type="Nome">
+        <label class="input__label" for="Nome">Nome Completo</label>
+      </div>
+      <div class="input ">
+        <input class="input__input" required="true" id="telefone" name="telefone" placeholder=" " type="telefone">
+        <label class="input__label" for="telefone">Telefone</label>
+      </div>
+      <div class="input ">
+        <input class="input__input" required="true" id="cidade" name="cidade" placeholder=" " type="cidade">
+        <label class="input__label" for="cidade">Cidade</label>
+      </div>
+      <div class="input ">
+        <input class="input__input" required="true" id="regiao" name="regiao" placeholder=" " type="regiao">
+        <label class="input__label" for="regiao">Regiao</label>
+      </div>
+
+
+      <div class=" mt-4 d-grid gap-2 ">
+        <button class="btn-lg btn btn-success" type="submit">
+          Cadastrar
+        </button>
+      </div>
+
+</form>

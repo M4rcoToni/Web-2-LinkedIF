@@ -20,6 +20,7 @@ public class SecurityConfigurationV2 {
         http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/cadastro").permitAll()
+                .antMatchers(HttpMethod.GET, "/forms/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/cadastro").permitAll()
                 .antMatchers(HttpMethod.GET, "/index").hasRole("ADMIN")
                 .antMatchers(HttpMethod.GET, "/save").hasRole("USER") // hasAnyRole

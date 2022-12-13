@@ -1,1 +1,1 @@
-$('#myModal').modal(options)
+$('.dropdown-toggle').dropdown()
