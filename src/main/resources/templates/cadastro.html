@@ -101,7 +101,7 @@
           <div class="dropdown-menu input " aria-labelledby="dropdownMenuButton">
             <div class="text-center">
               <a class=" p-4 dropdown-item text-black fs-4" data-toggle="collapse" href="#userComumId" role="button"
-                aria-expanded="false" aria-controls="userComumId userEmpresaId">
+                aria-expanded="false" aria-controls="userComumId">
                 Comum
               </a>
               <a class=" p-4 dropdown-item text-black fs-4" data-toggle="collapse" href="#userEmpresaId" role="button"
@@ -111,14 +111,19 @@
             </div>
 
           </div>
+
+          <div th:replace="~{forms/formcomum :: formcomum}">
+          </div>
+
         </div>
       </div>
     </div>
+    </div>
 
-    <form th:replace="~{forms/formcomum :: formcomum}"></form>
-    <!-- <form th:replace="~{forms/formempresa :: formempresa}"></form> -->
+    <div th:replace="~{forms/formempresa :: formempresa}"></div>
 
-    <div></div>
+
+
 
 
     <div class="container text-center">
