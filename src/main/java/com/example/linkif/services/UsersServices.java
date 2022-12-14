@@ -17,4 +17,6 @@ public interface UsersServices {
 
 	List<UserModel> findUsersBycategoriaLike(int categoria);
 
+	Integer insertIntoTbUsers(Integer id, Integer role_id);
+
 }

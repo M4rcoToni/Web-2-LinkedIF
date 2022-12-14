@@ -24,27 +24,26 @@ import net.bytebuddy.implementation.bind.annotation.Default;
 
 @Entity
 @Table(name = "TB_USER")
-public class UserModel implements UserDetails, Serializable {
-  private static final long serialVersionUID = 1L;
+public class UserModel implements UserDetails {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  private Long userId;
+  private int userId;
   @Column(nullable = false, unique = true)
   private String username;
   @Column(nullable = false)
   private String password;
 
-  private String nome;
+  @NotNull
+  private int role_id;
 
-  private String cidade;
+  @NotBlank
+  private String nome;
 
   private String regiao;
 
-  @Value("0")
-  private int idade;
+  private String idade;
 
-  @Value("0")
+  @NotNull
   private int cnpjoucpf;
 
   private String telefone;
@@ -68,14 +67,6 @@ public class UserModel implements UserDetails, Serializable {
     this.nome = nome;
   }
 
-  public String getCidade() {
-    return cidade;
-  }
-
-  public void setCidade(String cidade) {
-    this.cidade = cidade;
-  }
-
   public String getImagem() {
     return imagem;
   }
@@ -92,15 +83,15 @@ public class UserModel implements UserDetails, Serializable {
     this.regiao = regiao;
   }
 
-  public int getIdade() {
+  public String getIdade() {
     return idade;
   }
 
-  public void setIdade(int idade) {
+  public void setIdade(String idade) {
     this.idade = idade;
   }
 
-  public Long getUserId() {
+  public int getUserId() {
     return userId;
   }
 
@@ -120,7 +111,7 @@ public class UserModel implements UserDetails, Serializable {
     this.cnpjoucpf = cnpjoucpf;
   }
 
-  public void setUserId(Long userId) {
+  public void setUserId(int userId) {
     this.userId = userId;
   }
 
@@ -142,6 +133,14 @@ public class UserModel implements UserDetails, Serializable {
   public String getUsername() {
     // TODO Auto-generated method stub
     return this.username;
+  }
+
+  public int getRole_id() {
+    return role_id;
+  }
+
+  public void setRole_id(int role_id) {
+    this.role_id = role_id;
   }
 
   @Override

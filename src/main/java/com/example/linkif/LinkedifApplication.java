@@ -8,6 +8,7 @@ public class LinkedifApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(LinkedifApplication.class, args);
+
 	}
 
 }

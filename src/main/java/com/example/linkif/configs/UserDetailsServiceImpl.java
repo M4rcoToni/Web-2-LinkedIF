@@ -29,10 +29,15 @@ public class UserDetailsServiceImpl implements UserDetailsService {
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
     UserModel userModel = userRepository.findByUsername(username)
         .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + username));
+    if (userModel.getUsername() == null) {
 
-    System.out.println(userModel.getPassword());
-
+      throw new UsernameNotFoundException("Usuario não encontrado!");
+    }
+    System.out.println("///////////" + userModel.getUsername());
+    System.out.println("///////////" + userModel.getPassword());
+    System.out.println("///////////" + userModel.getAuthorities());
     return new User(userModel.getUsername(), userModel.getPassword(), true, true, true, true,
         userModel.getAuthorities());
   }
+
 }

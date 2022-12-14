@@ -50,6 +50,12 @@ public class UsersServicesImpl implements UsersServices {
 		return null;
 	}
 
+	@Override
+	public Integer insertIntoTbUsers(Integer id, Integer role_id) {
+		// TODO Auto-generated method stub
+		return repository.insertIntoTbUsers(id, role_id);
+	}
+
 	// @Override
 	// public List<UserModel> findAll() {
 	// return repository.findAll();

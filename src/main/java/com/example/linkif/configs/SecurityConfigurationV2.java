@@ -22,7 +22,7 @@ public class SecurityConfigurationV2 {
                 .antMatchers(HttpMethod.GET, "/cadastro").permitAll()
                 .antMatchers(HttpMethod.GET, "/forms/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/cadastro").permitAll()
-                .antMatchers(HttpMethod.GET, "/index").hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET, "/index").hasAnyRole("USER", "EMPRESA")
                 .antMatchers(HttpMethod.GET, "/save").hasRole("USER") // hasAnyRole
                 .antMatchers(HttpMethod.POST, "/save").hasRole("ADMIN") // hasAnyRole
                 // .antMatchers(HttpMethod.POST, "/index/categorias/**").hasRole("ADMIN")
