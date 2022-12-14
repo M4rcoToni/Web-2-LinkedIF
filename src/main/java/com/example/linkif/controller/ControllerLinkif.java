@@ -12,16 +12,20 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.Query;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 // import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.validation.BindingResult;
 import org.springframework.stereotype.Controller;
@@ -62,24 +66,49 @@ public class ControllerLinkif {
     }
 
     @RequestMapping(value = "/cadastro", method = RequestMethod.GET)
-    public String Cadastro() {
-
+    public ModelAndView Cadastro() {
+        ModelAndView mv = new ModelAndView("cadastro");
         // List<Categorias> categorias = repositoryCar.findAll();
         // mv.addObject("categorias", categorias);
 
-        return "/cadastro";
+        return mv;
     }
 
     @RequestMapping(value = "/cadastro", method = RequestMethod.POST)
-    public String savePost(@Valid UserModel user, BindingResult result, RedirectAttributes attributes) {
+    public String saveUser(@Valid UserModel user, BindingResult result, RedirectAttributes attributes) {
         if (result.hasErrors()) {
             System.out.println(result);
             attributes.addFlashAttribute("mensagem", "Verifique os campos!");
             return "redirect:/save";
 
         }
+        user.setUserId(1 + (int) (Math.random() * 4123));
+        int cnpjoucpf = (user.getCnpjoucpf());
+
+        String ecode = new BCryptPasswordEncoder().encode(user.getPassword());
+        user.setPassword(ecode);
+
+        user.setCnpjoucpf(cnpjoucpf);
         repositoryUser.save(user);
+
+        int role_id = (user.getRole_id());
+        user.setRole_id(role_id);
+
+        try {
+            repositoryUser.insertIntoTbUsers(user.getUserId(), user.getRole_id());
+        } catch (Exception e) {
+            System.out.println("???????????" + e);
+        }
+        System.out.println(user.getUserId());
+
         return "redirect:/index";
+    }
+
+    @RequestMapping(value = "/index", method = RequestMethod.GET)
+    public ModelAndView getIndex() {
+        ModelAndView mv = new ModelAndView("index");
+
+        return mv;
     }
     // // @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     // @RequestMapping(value = "/index", method = RequestMethod.GET)
@@ -209,4 +238,5 @@ public class ControllerLinkif {
     // mv.addObject("categorias", categorias);
     // return mv;
     // }
+
 }
