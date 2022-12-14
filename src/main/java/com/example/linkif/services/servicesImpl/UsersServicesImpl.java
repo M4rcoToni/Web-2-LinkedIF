@@ -16,8 +16,7 @@ public class UsersServicesImpl implements UsersServices {
 
 	@Override
 	public List<UserModel> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return repository.findAll();
 	}
 
 	@Override

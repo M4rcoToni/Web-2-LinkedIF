@@ -79,8 +79,15 @@ public class ControllerLinkif {
         if (result.hasErrors()) {
             System.out.println(result);
             attributes.addFlashAttribute("mensagem", "Verifique os campos!");
-            return "redirect:/save";
+            return "redirect:/cadastro";
 
+        }
+        List<UserModel> users = repositoryUser.findAll();
+        for (UserModel userModel : users) {
+            if (user.getUsername().equals(userModel.getUsername())) {
+                attributes.addFlashAttribute("mensagem", "Verifique os campos!");
+                return "redirect:/cadastro";
+            }
         }
         user.setUserId(1 + (int) (Math.random() * 4123));
         int cnpjoucpf = (user.getCnpjoucpf());
@@ -91,14 +98,18 @@ public class ControllerLinkif {
         user.setCnpjoucpf(cnpjoucpf);
         repositoryUser.save(user);
 
-        int role_id = (user.getRole_id());
-        user.setRole_id(role_id);
-
-        try {
-            repositoryUser.insertIntoTbUsers(user.getUserId(), user.getRole_id());
-        } catch (Exception e) {
-            System.out.println("???????????" + e);
+        if (user.getIdade() == null) {
+            user.setRole_id(12);
+            repositoryUser.insertIntoTbUsers(user.getUserId(), 12);
+        } else {
+            user.setRole_id(11);
+            repositoryUser.insertIntoTbUsers(user.getUserId(), 11);
         }
+        // try {
+        // } catch (Exception e) {
+        // System.out.println("???????????" + e);
+        // }
+
         System.out.println(user.getUserId());
 
         return "redirect:/index";

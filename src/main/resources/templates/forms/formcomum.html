@@ -2,21 +2,8 @@
 
   <form class="collapse sign-in-form hero-cta-form" id="userComumId" method="post" novalidate
     data-js-module-id="d2l-sign-in-form" th:fragment="formcomum">
-
-    <div class="alert hidden" role="alert" tabindex="-1">
-      <div class="wrapper">
-        <p class="alert-content">
-          <th:block th:include="mensagemValidacao"></th:block>
-        </p>
-      </div>
-    </div>
     <div class="sign-in-form__form-input-container">
       <!-- INPUTS DE COMUM -->
-      <div class="input__input collapse">
-        <select id="role_id" name="role_id">
-          <option value="11" selected>Comum</option>
-        </select>
-      </div>
       <div class="input   mx-auto">
         <div class="input">
           <input class="input__input" required="true" id="username" name="username" placeholder=" " type="text">
