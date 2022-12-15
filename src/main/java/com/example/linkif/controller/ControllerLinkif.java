@@ -117,6 +117,13 @@ public class ControllerLinkif {
 
         return mv;
     }
+
+    @RequestMapping(value = "/vagas", method = RequestMethod.GET)
+    public ModelAndView getVagas() {
+        ModelAndView mv = new ModelAndView("vagas");
+
+        return mv;
+    }
     // // @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     // @RequestMapping(value = "/index", method = RequestMethod.GET)
     // public ModelAndView getGetCategoria() {
