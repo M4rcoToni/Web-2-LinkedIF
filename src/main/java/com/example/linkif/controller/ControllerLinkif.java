@@ -95,20 +95,16 @@ public class ControllerLinkif {
         String ecode = new BCryptPasswordEncoder().encode(user.getPassword());
         user.setPassword(ecode);
 
+        if (user.getIdade() == null) {
+            user.setRole_id(12);
+        } else {
+            user.setRole_id(11);
+        }
+
         user.setCnpjoucpf(cnpjoucpf);
         repositoryUser.save(user);
 
-        if (user.getIdade() == null) {
-            user.setRole_id(12);
-            repositoryUser.insertIntoTbUsers(user.getUserId(), 12);
-        } else {
-            user.setRole_id(11);
-            repositoryUser.insertIntoTbUsers(user.getUserId(), 11);
-        }
-        // try {
-        // } catch (Exception e) {
-        // System.out.println("???????????" + e);
-        // }
+        repositoryUser.insertIntoTbUsers(user.getUserId(), user.getRole_id());
 
         System.out.println(user.getUserId());
 
