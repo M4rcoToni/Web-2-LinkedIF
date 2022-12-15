@@ -6,3 +6,8 @@ body{
 div.divider {
     border-top: 3px solid #bbb;
   }
+
+  .container-fluid {
+    width: 278px !important;
+
+}

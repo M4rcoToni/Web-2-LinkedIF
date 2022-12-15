@@ -92,7 +92,7 @@
     </h2>
     <div class="wrapper">
       <h3 class="alert-content">
-        <th:block th:include="mensagemValidacao"></th:block>
+        <th:block th:include="/components/mensagemValidacao"></th:block>
       </h3>
     </div>
     </div>
@@ -132,37 +132,8 @@
 
 
 
-    <div class="container text-center">
-      <footer class="li-footer bg-transparent w-full row align-items-end">
-        <ul
-          class="text-center li-footer__list flex flex-wrap flex-row justify-center w-full h-auto min-h-[50px] my-[0px] mx-auto py-3 px-2 papabear:w-[1128px] papabear:p-0">
+    <footer th:replace="~{/components/footer :: footer}"></footer>
 
-          <li
-            class="li-footer__item font-sans text-xs text-color-text-low-emphasis flex flex-shrink-0 justify-start p-1 relative w-50% papabear:justify-center papabear:w-auto">
-
-            <span class="sr-only">LinkedIn</span>
-            <img class="li-footer__copy-logo text-color-logo-brand-alt inline-block self-center h-[14px] w-[56px] mr-1"
-              data-delayed-url="https://github.com/M4rcoToni/Web-2-LinkedIF/blob/master/src/main/resources/static/img/logo.png?raw=true"></img>
-            <span class="li-footer__copy-text flex items-center">&copy; 2022</span>
-
-          </li>
-
-
-          <li
-            class="li-footer__item font-sans text-xs text-color-text-low-emphasis flex flex-shrink-0 justify-start p-1 relative w-50% papabear:justify-center papabear:w-auto">
-            <a class="li-footer__item-link flex items-center font-sans text-xs font-bold text-color-text-low-emphasis hover:text-color-link-hover focus:text-color-link-focus"
-              href="https://about.linkedin.com?trk=homepage-basic_footer-about"
-              data-tracking-control-name="homepage-basic_footer-about" data-tracking-will-navigate>
-
-              About
-
-            </a>
-          </li>
-
-        </ul>
-        <!---->
-      </footer>
-    </div>
 
     <script src="https://static.licdn.com/aero-v1/sc/h/9q42psw84tv933tbvwqoe327v" async defer></script>
     <script data-delayed-url="https://static.licdn.com/aero-v1/sc/h/etkd25e7kzp2lrg1w9y0kixlu"

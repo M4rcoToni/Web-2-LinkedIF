@@ -14,18 +14,15 @@
 </head>
 
 <body>
-    <nav th:replace="~{nav :: nav}"></nav>
-    <!-- Header-->
 
 
     <!-- Header-->
-    <header th:replace="~{header :: header}"></header>
 
     <div class="container">
         <p class="fs-2 mt-4">Cadstre seu veiculo em nosso site!</p>
 
         <div class="row m-3">
-            <th:block th:include="mensagemValidacao"></th:block>
+            <th:block th:include="/components/mensagemValidacao"></th:block>
 
             <form method="post" enctype="multipart/form-data">
 

@@ -51,145 +51,98 @@
   <!---->
 </head>
 
-<body dir="ltr">
+<body dir="ltr" class="">
+
+  <nav th:replace="~{/components/nav :: nav}"></nav>
+
+  <div class="nav">
+    <div class="container card m-4">
+      <div class="row p-3">
+        <div class="col-sm-5 bg-amber-70 container-fluid" style="overflow:scroll; height: 800px;; ">
+          <ul>
+            <li>
+              <h1>teste</h1>
+              <h1>teste2</h1>
+              <h1>teste4</h1>
+              <h1>teste3</h1>
+              <h3>teste testetes</h1>
+            </li>
+            <li>
+              <h1>teste</h1>
+              <h1>teste2</h1>
+              <h1>teste4</h1>
+              <h1>teste3</h1>
+              <h3>teste testetes</h1>
+            </li>
+            <li>
+              <h1>teste</h1>
+              <h1>teste2</h1>
+              <h1>teste4</h1>
+              <h1>teste3</h1>
+              <h3>teste testetes</h1>
+            </li>
+            <li>
+              <h1>teste</h1>
+              <h1>teste2</h1>
+              <h1>teste4</h1>
+              <h1>teste3</h1>
+              <h3>teste testetes</h1>
+            </li>
+            <li>
+              <h1>teste</h1>
+              <h1>teste2</h1>
+              <h1>teste4</h1>
+              <h1>teste3</h1>
+              <h3>teste testetes</h1>
+            </li>
+            <li>
+              <h1>teste</h1>
+              <h1>teste2</h1>
+              <h1>teste4</h1>
+              <h1>teste3</h1>
+              <h3>teste testetes</h1>
+            </li>
+            <li>
+              <h1>teste</h1>
+              <h3>teste testetes</h1>
+            </li>
+            <li>
+              <h1>teste</h1>
+              <h3>teste testetes</h1>
+            </li>
+            <li></li>
+          </ul>
+        </div>
 
 
-  <nav class="nav pt-1.5 pb-2 flex items-center justify-between relative flex-nowrap babybear:flex-wrap babybear:py-1.5
-    " aria-label="Primary">
-
-    <!---->
-    <a href="/?trk=guest_homepage-basic_nav-header-logo" class="nav__logo-link link-no-visited-state z-1 mr-auto babybear:z-0 babybear:mr-0 babybear:flex-1 hover:no-underline focus:no-underline active:no-underline
-      " data-tracking-control-name="guest_homepage-basic_nav-header-logo" data-tracking-will-navigate>
-
-
-      <span class="sr-only">LinkedIF</span>
-      <!-- IMGAGEM DO LOGO-->
-      <img
-        th:src="@{https://github.com/M4rcoToni/Web-2-LinkedIF/blob/master/src/main/resources/static/img/logo.png?raw=true}"
-        alt="" width="150">
-      <ul
-        class="my-x top-nav-menu flex items-center nav__menu order-3 after:up-down-divider after:!h-[37px] mr-0.5 babybear:hidden mamabear:hidden">
-        <li class>
-
-          <a href="https://www.linkedin.com/jobs/search?trk=guest_homepage-basic_guest_nav_menu_jobs"
-            data-tracking-control-name="guest_homepage-basic_guest_nav_menu_jobs" data-tracking-will-navigate class="top-nav-link flex justify-center items-center h-[52px] hover:text-color-text visited:hover:text-color-text hover:no-underline
-    w-[64px] flex-col mx-1 text-color-text-low-emphasis visited:text-color-text-low-emphasis">
-            <li-icon aria-hidden="true" type="people" size="large"><svg xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24" data-supported-dps="24x24" fill="currentColor" class="mercado-match" width="24"
-                height="24" focusable="false">
-                <path
-                  d="M12 16v6H3v-6a3 3 0 013-3h3a3 3 0 013 3zm5.5-3A3.5 3.5 0 1014 9.5a3.5 3.5 0 003.5 3.5zm1 2h-2a2.5 2.5 0 00-2.5 2.5V22h7v-4.5a2.5 2.5 0 00-2.5-2.5zM7.5 2A4.5 4.5 0 1012 6.5 4.49 4.49 0 007.5 2z">
-                </path>
-              </svg></li-icon>
-            <span class="top-nav-link__label-text font-sans text-sm leading-regular text-center
-              font-regular">
-              Minhas Vagas
-            </span>
-          </a>
-        <li class>
-
-          <a href="https://www.linkedin.com/jobs/search?trk=guest_homepage-basic_guest_nav_menu_jobs"
-            data-tracking-control-name="guest_homepage-basic_guest_nav_menu_jobs" data-tracking-will-navigate class="top-nav-link flex justify-center items-center h-[52px] hover:text-color-text visited:hover:text-color-text hover:no-underline
-    w-[64px] flex-col mx-1
-    text-color-text-low-emphasis visited:text-color-text-low-emphasis">
-            <icon class="top-nav-link__icon flex h-3 w-3 flex-shrink-0 "
-              data-delayed-url="https://static.licdn.com/aero-v1/sc/h/92eb1xekc34eklevj0io6x4ki">
-            </icon>
-            <span class="top-nav-link__label-text font-sans text-sm leading-regular text-center
-      font-regular">
-              Vagas
-            </span>
-          </a>
-
-        </li>
-        <li class="global-nav__primary-item mr-3">
-          <!---->
-          <div class=" ">
-            <button aria-expanded="false" id="ember16" class="" type="button" tabindex="0">
-              <img width="30"
-                src="https://media.licdn.com/dms/image/C5603AQECHfxYjj3BUQ/profile-displayphoto-shrink_100_100/0/1655222352136?e=1676505600&amp;v=beta&amp;t=K0f7DU4iYzJDpgAKTV9dvHfevDApuSwRTE8_7wwP9HM"
-                height="30" alt="" id="ember17" class="rounded-5">
-            </button>
-            <span class="  leading-regular text-center font-regular">
-              Eu
-            </span>
+        <div class="col-sm-7 bg-blue-20 text-center ">
+          <div class=" p-3">
+            <div class="container-fluid">col-sm-4</div>
           </div>
-
-
-        </li>
-      </ul>
-
-
-      <div class=" nav__cta-container order-3 flex gap-x-1 justify-end min-w-[100px] flex-nowrap flex-shrink-0
-                babybear:flex-wrap flex-2 ">
-
-        <button class=" nav__button-danger btn-md btn btn-outline-danger" href=""
-          data-tracking-control-name="guest_homepage-basic_nav-header-signin" data-tracking-will-navigate>
-          Sair
-        </button>
-
+        </div>
       </div>
-
-  </nav>
-
-  <main class="flex flex-col items-center overflow-hidden min-h-[calc(100vh-76px-50px)]" role="main" id="main-content">
-
-
-    <!---->
+    </div>
+  </div>
 
 
 
-    <!---->
-    <!---->
+  <footer th:replace="~{/components/footer :: footer}"></footer>
 
+  <script src="https://static.licdn.com/aero-v1/sc/h/9q42psw84tv933tbvwqoe327v" async defer></script>
 
+  <!---->
+  <script data-delayed-url="https://static.licdn.com/aero-v1/sc/h/etkd25e7kzp2lrg1w9y0kixlu"
+    data-module-id="google-sign-in-lib"></script>
+  <script data-delayed-url="https://static.licdn.com/aero-v1/sc/h/98lptr8kagfxge22q7k1fps8"
+    data-module-id="google-one-tap-lib"></script>
 
-
-
-    <footer class="li-footer bg-transparent w-full  ">
-      <ul
-        class="text-center li-footer__list flex flex-wrap flex-row justify-center w-full h-auto min-h-[50px] my-[0px] mx-auto py-3 px-2 papabear:w-[1128px] papabear:p-0">
-
-        <li
-          class="li-footer__item font-sans text-xs text-color-text-low-emphasis flex flex-shrink-0 justify-start p-1 relative w-50% papabear:justify-center papabear:w-auto">
-
-          <span class="sr-only">LinkedIn</span>
-          <img class="li-footer__copy-logo text-color-logo-brand-alt inline-block self-center h-[14px] w-[56px] mr-1"
-            data-delayed-url="https://github.com/M4rcoToni/Web-2-LinkedIF/blob/master/src/main/resources/static/img/logo.png?raw=true"></img>
-          <span class="li-footer__copy-text flex items-center">&copy; 2022</span>
-
-        </li>
-
-
-        <li
-          class="li-footer__item font-sans text-xs text-color-text-low-emphasis flex flex-shrink-0 justify-start p-1 relative w-50% papabear:justify-center papabear:w-auto">
-          <a class="li-footer__item-link flex items-center font-sans text-xs font-bold text-color-text-low-emphasis hover:text-color-link-hover focus:text-color-link-focus"
-            href="https://about.linkedin.com?trk=homepage-basic_footer-about"
-            data-tracking-control-name="homepage-basic_footer-about" data-tracking-will-navigate>
-
-            About
-
-          </a>
-        </li>
-
-
-
-      </ul>
-
-      <!---->
-    </footer>
-
-
-    <script src="https://static.licdn.com/aero-v1/sc/h/9q42psw84tv933tbvwqoe327v" async defer></script>
-
-    <!---->
-    <script data-delayed-url="https://static.licdn.com/aero-v1/sc/h/etkd25e7kzp2lrg1w9y0kixlu"
-      data-module-id="google-sign-in-lib"></script>
-    <script data-delayed-url="https://static.licdn.com/aero-v1/sc/h/98lptr8kagfxge22q7k1fps8"
-      data-module-id="google-one-tap-lib"></script>
-
-
-    <script src="https://static.licdn.com/aero-v1/sc/h/7dzsoyz1bsr7e64b321m3tjgi" async></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+    integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
+    crossorigin="anonymous"></script>
+  <script src="https://static.licdn.com/aero-v1/sc/h/7dzsoyz1bsr7e64b321m3tjgi" async></script>
 
 </body>
 

@@ -1,0 +1,77 @@
+<!-- Navigation-->
+<nav class="nav pt-1.5 pb-2 flex items-center justify-between relative flex-nowrap 
+babybear:flex-wrap babybear:py-1.5" th:fragment="nav" aria-label="Primary">
+
+    <!---->
+    <a th:href="@{/login}" class="nav__logo-link link-no-visited-state z-1 mr-auto 
+    babybear:z-0 babybear:mr-0 babybear:flex-1 hover:no-underline focus:no-underline active:no-underline
+      " data-tracking-control-name="guest_homepage-basic_nav-header-logo" data-tracking-will-navigate>
+
+
+        <span class="sr-only">LinkedIF</span>
+        <!-- IMGAGEM DO LOGO-->
+        <img th:src="@{https://github.com/M4rcoToni/Web-2-LinkedIF/blob/master/src/main/resources/static/img/logo.png?raw=true}"
+            alt="" width="150">
+        <ul class="my-x top-nav-menu flex items-center nav__menu order-3 after:up-down-divider
+             after:!h-[37px] mr-0.5 babybear:hidden mamabear:hidden">
+            <li class>
+
+                <a href="https://www.linkedin.com/jobs/search?trk=guest_homepage-basic_guest_nav_menu_jobs"
+                    data-tracking-control-name="guest_homepage-basic_guest_nav_menu_jobs" data-tracking-will-navigate
+                    class="top-nav-link flex justify-center items-center h-[52px] hover:text-color-text 
+                    visited:hover:text-color-text hover:no-underline
+                    w-[64px] flex-col mx-1 text-color-text-low-emphasis visited:text-color-text-low-emphasis">
+                    <li-icon aria-hidden="true" type="people" size="large"><svg xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24" data-supported-dps="24x24" fill="currentColor" class="mercado-match"
+                            width="24" height="24" focusable="false">
+                            <path
+                                d="M12 16v6H3v-6a3 3 0 013-3h3a3 3 0 013 3zm5.5-3A3.5 3.5 0 1014 9.5a3.5 3.5 0 003.5 3.5zm1 2h-2a2.5 2.5 0 00-2.5 2.5V22h7v-4.5a2.5 2.5 0 00-2.5-2.5zM7.5 2A4.5 4.5 0 1012 6.5 4.49 4.49 0 007.5 2z">
+                            </path>
+                        </svg></li-icon>
+                    <span class="top-nav-link__label-text font-sans text-sm leading-regular text-center font-regular">
+                        Minhas Vagas
+                    </span>
+                </a>
+            <li class>
+
+                <a href="https://www.linkedin.com/jobs/search?trk=guest_homepage-basic_guest_nav_menu_jobs"
+                    data-tracking-control-name="guest_homepage-basic_guest_nav_menu_jobs" data-tracking-will-navigate
+                    class="top-nav-link flex justify-center items-center h-[52px] hover:text-color-text visited:hover:text-color-text hover:no-underline w-[64px] flex-col mx-1  text-color-text-low-emphasis visited:text-color-text-low-emphasis">
+                    <icon class="top-nav-link__icon flex h-3 w-3 flex-shrink-0 "
+                        data-delayed-url="https://static.licdn.com/aero-v1/sc/h/92eb1xekc34eklevj0io6x4ki">
+                    </icon>
+                    <span class="top-nav-link__label-text font-sans text-sm leading-regular text-center font-regular">
+                        Vagas
+                    </span>
+                </a>
+
+            </li>
+            <li class="global-nav__primary-item mr-3">
+                <!---->
+                <div class=" ">
+                    <button aria-expanded="false" id="ember16" class="" type="button" tabindex="0">
+                        <img width="30"
+                            src="https://media.licdn.com/dms/image/C5603AQECHfxYjj3BUQ/profile-displayphoto-shrink_100_100/0/1655222352136?e=1676505600&amp;v=beta&amp;t=K0f7DU4iYzJDpgAKTV9dvHfevDApuSwRTE8_7wwP9HM"
+                            height="30" alt="" id="ember17" class="rounded-5">
+                    </button>
+                    <span class="  leading-regular text-center font-regular">
+                        Eu
+                    </span>
+                </div>
+
+
+            </li>
+        </ul>
+
+
+        <div class=" nav__cta-container order-3 flex gap-x-1 justify-end min-w-[100px] flex-nowrap flex-shrink-0
+                babybear:flex-wrap flex-2 ">
+
+            <button class=" nav__button-danger btn-md btn btn-outline-danger" href=""
+                data-tracking-control-name="guest_homepage-basic_nav-header-signin" data-tracking-will-navigate>
+                Sair
+            </button>
+
+        </div>
+
+</nav>
