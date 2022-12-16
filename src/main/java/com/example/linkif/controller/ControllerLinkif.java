@@ -75,7 +75,8 @@ public class ControllerLinkif {
     }
 
     @RequestMapping(value = "/cadastro", method = RequestMethod.POST)
-    public String saveUser(@Valid UserModel user, BindingResult result, RedirectAttributes attributes) {
+    public String saveUser(@Valid UserModel user, BindingResult result, RedirectAttributes attributes,
+            @RequestParam("file") MultipartFile imagem) {
         if (result.hasErrors()) {
             System.out.println(result);
             attributes.addFlashAttribute("mensagem", "Verifique os campos!");
@@ -89,6 +90,18 @@ public class ControllerLinkif {
                 return "redirect:/cadastro";
             }
         }
+        try {
+            if (!imagem.isEmpty()) {
+                byte[] bytes = imagem.getBytes();
+                String nomeImagem = LocalDate.now() + imagem.getOriginalFilename();
+                Path caminho = Paths.get("./src/main/resources/static/img/" + nomeImagem);
+                Files.write(caminho, bytes);
+                user.setImagem(nomeImagem);
+            }
+        } catch (IOException e) {
+            System.out.println("ERRO NA IMAGEM" + e);
+        }
+
         user.setUserId(1 + (int) (Math.random() * 4123));
         int cnpjoucpf = (user.getCnpjoucpf());
 

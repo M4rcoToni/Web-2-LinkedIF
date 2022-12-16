@@ -1,7 +1,7 @@
 <div>
 
   <form class="collapse sign-in-form hero-cta-form" id="userEmpresaId" method="post" novalidate
-    data-js-module-id="d2l-sign-in-form" th:fragment="formempresa">
+    data-js-module-id="d2l-sign-in-form" th:fragment="formempresa" enctype="multipart/form-data">
     <div class="sign-in-form__form-input-container">
       <!-- INPUTS DE EMPRESA -->
       <div class="input  mx-auto">
@@ -14,10 +14,19 @@
           <label class="input__label" for="password">Senha</label>
         </div>
         <div class="input ">
+          <label class="input__label" for="imagem">Logo da empresa</label>
+          <div class="input__input">
+            <input required="true" id="imagem" name="file" placeholder=" " type="file">
+          </div>
+        </div>
+        <div class="input ">
+          <input class="input__input" required="true" id="cidade" name="cidade" placeholder=" " type="cidade">
+          <label class="input__label" for="cidade">Cidade</label>
+        </div>
+        <div class="input ">
           <input class="input__input" required="true" id="Nome" name="nome" placeholder=" " type="text">
           <label class="input__label" for="Nome">Nome Completo</label>
         </div>
-
         <div class="input ">
           <input class="input__input" required="true" id="regiao" name="cnpjoucpf" placeholder=" " type="number">
           <label class="input__label" for="cnpjoucpf">CNPJ</label>

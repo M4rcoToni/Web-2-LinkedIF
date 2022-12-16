@@ -47,6 +47,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
 
   <link rel="stylesheet" href="https://static.licdn.com/aero-v1/sc/h/86zy6pk2bnlnkpgdsvll6f113">
+  <link th:href="@{/css/styles.css}" rel="stylesheet" />
 
   <!---->
 </head>
@@ -128,7 +129,13 @@
 
     <div th:replace="~{forms-login/formempresa :: formempresa}"></div>
 
-
+    <style>
+      #imagem {
+        cursor: pointer;
+        opacity: 0;
+        z-index: -1;
+      }
+    </style>
 
 
 

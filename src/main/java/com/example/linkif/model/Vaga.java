@@ -20,34 +20,26 @@ public class Vaga {
   private int id;
 
   @NotBlank
-  private String nome;
+  private String titulo;
 
   @NotBlank
   private String salario;
 
-  @NotNull
-  private int status;
+  @NotBlank
+  private String descricao;
 
   @NotNull
   private int tipo;
 
   @NotNull
-  private Long vagaId;
+  private int vagaId;
 
-  public String getNome() {
-    return nome;
+  public String gettitulo() {
+    return titulo;
   }
 
-  public void setNome(String nome) {
-    this.nome = nome;
-  }
-
-  public int getStatus() {
-    return status;
-  }
-
-  public void setStatus(int status) {
-    this.status = status;
+  public void settitulo(String titulo) {
+    this.titulo = titulo;
   }
 
   public int getTipo() {
@@ -58,11 +50,11 @@ public class Vaga {
     this.tipo = tipo;
   }
 
-  public Long getVagaId() {
+  public int getVagaId() {
     return vagaId;
   }
 
-  public void setVagaId(Long vagaId) {
+  public void setVagaId(int vagaId) {
     this.vagaId = vagaId;
   }
 

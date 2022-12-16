@@ -21,6 +21,7 @@ public class SecurityConfigurationV2 {
                 .authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/cadastro").permitAll()
                 .antMatchers(HttpMethod.GET, "/forms/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/vagas").permitAll()
                 .antMatchers(HttpMethod.POST, "/cadastro").permitAll()
                 .antMatchers(HttpMethod.GET, "/index").hasAnyRole("USER", "EMPRESA")
                 .antMatchers(HttpMethod.GET, "/save").hasRole("USER") // hasAnyRole
