@@ -55,33 +55,8 @@
 <body dir="ltr">
 
 
-  <nav class="nav pt-1.5 pb-2 flex items-center justify-between relative flex-nowrap babybear:flex-wrap babybear:py-1.5
-    " aria-label="Primary">
+  <nav th:replace="~{/components/navHome :: navhome}"></nav>
 
-    <!---->
-    <a th:href="@{/login}" class="nav__logo-link link-no-visited-state z-1 mr-auto babybear:z-0 babybear:mr-0 babybear:flex-1 hover:no-underline focus:no-underline active:no-underline
-      " data-tracking-control-name="guest_homepage-basic_nav-header-logo" data-tracking-will-navigate>
-
-
-      <span class="sr-only">LinkedIF</span>
-      <!-- IMGAGEM DO LOGO-->
-      <img
-        th:src="@{https://github.com/M4rcoToni/Web-2-LinkedIF/blob/master/src/main/resources/static/img/logo.png?raw=true}"
-        alt="" width="150">
-
-
-
-      <div class="nav__cta-container order-3 flex gap-x-1 justify-end min-w-[100px] flex-nowrap flex-shrink-0 babybear:flex-wrap flex-2
-      ">
-        <a class="nav__button-tertiary btn-md btn-tertiary" href=""
-          data-tracking-control-name="guest_homepage-basic_nav-header-join" data-tracking-will-navigate>
-
-        </a>
-
-
-      </div>
-
-  </nav>
 
   <main class="flex flex-col items-center overflow-hidden min-h-[calc(100vh-76px-50px)]" role="main" id="main-content">
 
@@ -96,38 +71,12 @@
         <th:block th:include="/components/mensagemValidacao"></th:block>
       </h3>
     </div>
-    </div>
     <div class="sign-in-form hero-cta-form">
       <div class=" input ">
-        <div class=" dropdown d-grid gap-2">
-          <button class="p-3 btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" aria-expanded="false"
-            data-toggle="dropdown">
-            Tipo de Usuario
-          </button>
-
-          <div class="dropdown-menu input " aria-labelledby="dropdownMenuButton">
-            <div class="text-center">
-              <a class=" p-4 dropdown-item text-black fs-4" data-toggle="collapse" href="#userComumId" role="button"
-                aria-expanded="false" aria-controls="userComumId">
-                Comum
-              </a>
-              <a class=" p-4 dropdown-item text-black fs-4" data-toggle="collapse" href="#userEmpresaId" role="button"
-                aria-expanded="false" aria-controls="userEmpresaId">
-                Empresa
-              </a>
-            </div>
-
-          </div>
-
-          <div th:replace="~{forms-login/formcomum :: formcomum}">
-          </div>
-
+        <div th:replace="~{forms-login/formcomum :: formcomum}">
         </div>
       </div>
     </div>
-    </div>
-
-    <div th:replace="~{forms-login/formempresa :: formempresa}"></div>
 
     <style>
       #imagem {

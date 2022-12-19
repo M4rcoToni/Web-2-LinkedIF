@@ -53,7 +53,9 @@
 
 <body dir="ltr" class="">
 
-  <nav th:replace="~{/components/nav :: nav}"></nav>
+  <nav
+    th:replace="${ authenticated == true} ? ~{/components/navEmpresa :: navemp} :  ~{/components/navHome :: navhome}">
+  </nav>
 
   <div class="nav">
     <div class="container card m-4">
@@ -61,56 +63,54 @@
         <div class="col-sm-5 container-fluid" style="overflow:scroll; height: 800px;; ">
           <ul>
 
-            <li>
-              <a href="">
-                <div class="card mb-3" style="max-width: 540px;">
-                  <!-- <div class="row g-0">
-                    <div class="col-md-4">
-                      <img th:if="${vaga.imagem != null}" th:src="@{img/{imagem}(imagem=${vaga.imagem})}"
-                        class="img-fluid rounded-start" alt="...">
-                    </div>
-                    <div class="col-md-8">
-                      <div class="card-body">
-                        <h5 th:text="${vaga.nome}" class="card-title">Vaga nomde</h5>
-                        <p th:text="${vaga.empresa}" class="card-text">empresa da vaga</p>
-                        <p th:text="${vaga.lugar}" class="card-text"><small class="text-muted">Lugar da empresa</small>
-                        </p>
-                      </div>
-                    </div>
-                  </div> -->
-                </div>
-              </a>
-            </li>
-            <li>
-              <a href="">
+            <li th:each="vagas : ${vagas}">
+              <a class="text-decoration-none" th:href="@{/vagas/{id}(id=${vagas.id})}">
                 <div class="card mb-3" style="max-width: 540px;">
                   <div class="row g-0">
-                    <div class="col-md-4">
-                      <img src="..." class="img-fluid rounded-start" alt="...">
-                    </div>
+                    <!-- <div class="col-md-4">
+                      <img th:if="${vaga.imagem != null}" th:src="@{img/{imagem}(imagem=${vaga.imagem})}"
+                        class="img-fluid rounded-start" alt="...">
+                    </div> -->
                     <div class="col-md-8">
                       <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                          additional content. This content is a little bit longer.</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        <h4 th:text="${vagas.titulo}" class="card-title text-success">Vaga nomde</h4>
+                        <p th:text="${vagas.regiao}" class="card-text">empresa da vaga</p>
+                        <p th:text="${vagas.empresaName}" class="card-text"><small class="text-muted">Lugar da
+                            empresa</small>
+                        </p>
                       </div>
                     </div>
                   </div>
                 </div>
               </a>
             </li>
-
           </ul>
         </div>
 
 
-        <div class="col-sm-7  text-center ">
-          <div class=" p-3">
-            <div class="container-fluid">
-              <h2>titulo da vaga</h2>
-              <span>Nome da empresa</span>
-              <span>Cidade</span>
+        <div class="col-sm-7 ">
+          <div>
+            <div class="container-fluid mx-5 mt-3">
+              <h2 class="bold" th:text="${titulo}?: 'Selecione uma 
+              vaga para ver mais detalhes!'">titulo da vaga</h2>
+              <span class="fs-3" th:text="${empresa}">Nome da empresa</span>
+              <span class="ml-2" th:text="${regiao}">Cidade</span>
+              <p class="mt-3">
+                <li-icon th:if="${tipo != null}" aria-hidden="true" type="job" size="large"><svg
+                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-supported-dps="24x24"
+                    fill="currentColor" class="mercado-match" width="24" height="24" focusable="false">
+                    <path
+                      d="M17 6V5a3 3 0 00-3-3h-4a3 3 0 00-3 3v1H2v4a3 3 0 003 3h14a3 3 0 003-3V6zM9 5a1 1 0 011-1h4a1 1 0 011 1v1H9zm10 9a4 4 0 003-1.38V17a3 3 0 01-3 3H5a3 3 0 01-3-3v-4.38A4 4 0 005 14z">
+                    </path>
+                  </svg></li-icon>
+                <span th:if="${tipo == 1}">Tempo Integral</span>
+                <span th:if="${tipo == 2}">Meio período</span>
+                <span th:if="${tipo == 3}">Freelancer</span>
+              </p>
+              <p class="mt-4 text-area-counter">
+                <span class="mt-4" th:text="${descricao}"></span>
+              </p>
+
 
             </div>
           </div>

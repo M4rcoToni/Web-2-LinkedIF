@@ -1,6 +1,6 @@
 <!-- Navigation-->
 <nav class="nav pt-1.5 pb-2 flex items-center justify-between relative flex-nowrap 
-babybear:flex-wrap babybear:py-1.5" th:fragment="nav" aria-label="Primary">
+babybear:flex-wrap babybear:py-1.5" th:fragment="navemp" aria-label="Primary">
 
     <!---->
     <a th:href="@{/login}" class="nav__logo-link link-no-visited-state z-1 mr-auto 
@@ -34,8 +34,22 @@ babybear:flex-wrap babybear:py-1.5" th:fragment="nav" aria-label="Primary">
                 </a>
             <li class>
 
-                <a href="https://www.linkedin.com/jobs/search?trk=guest_homepage-basic_guest_nav_menu_jobs"
-                    data-tracking-control-name="guest_homepage-basic_guest_nav_menu_jobs" data-tracking-will-navigate
+                <a th:href="@{/cadastro/vagas}" data-tracking-control-name="guest_homepage-basic_guest_nav_menu_jobs"
+                    data-tracking-will-navigate
+                    class="top-nav-link flex justify-center items-center h-[52px] hover:text-color-text visited:hover:text-color-text hover:no-underline w-[64px] flex-col mx-1  text-color-text-low-emphasis visited:text-color-text-low-emphasis">
+                    <icon class="top-nav-link__icon flex h-3 w-3 flex-shrink-0 "
+                        data-delayed-url="https://static.licdn.com/aero-v1/sc/h/92eb1xekc34eklevj0io6x4ki">
+                    </icon>
+                    <span class="top-nav-link__label-text font-sans text-sm leading-regular text-center font-regular">
+                        Cadastrar
+                    </span>
+                </a>
+
+            </li>
+            <li class>
+
+                <a href="/vagas" data-tracking-control-name="guest_homepage-basic_guest_nav_menu_jobs"
+                    data-tracking-will-navigate
                     class="top-nav-link flex justify-center items-center h-[52px] hover:text-color-text visited:hover:text-color-text hover:no-underline w-[64px] flex-col mx-1  text-color-text-low-emphasis visited:text-color-text-low-emphasis">
                     <icon class="top-nav-link__icon flex h-3 w-3 flex-shrink-0 "
                         data-delayed-url="https://static.licdn.com/aero-v1/sc/h/92eb1xekc34eklevj0io6x4ki">
@@ -66,11 +80,12 @@ babybear:flex-wrap babybear:py-1.5" th:fragment="nav" aria-label="Primary">
 
         <div class=" nav__cta-container order-3 flex gap-x-1 justify-end min-w-[100px] flex-nowrap flex-shrink-0
                 babybear:flex-wrap flex-2 ">
+            <form class="d-flex" th:action="@{/logout}">
+                <button class=" nav__button-danger btn-md btn btn-outline-danger" type="submit" method="post">
+                    Sair
+                </button>
+            </form>
 
-            <button class=" nav__button-danger btn-md btn btn-outline-danger" href=""
-                data-tracking-control-name="guest_homepage-basic_nav-header-signin" data-tracking-will-navigate>
-                Sair
-            </button>
 
         </div>
 

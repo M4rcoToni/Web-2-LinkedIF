@@ -23,11 +23,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import net.bytebuddy.implementation.bind.annotation.Default;
 
 @Entity
-@Table(name = "TB_USER")
-public class UserModel implements UserDetails {
+@Table(name = "TB_EMPRESA")
+public class EmpresaModel implements UserDetails {
 
   @Id
-  private int userId;
+  private int empresaId;
   @Column(nullable = false, unique = true)
   private String username;
   @Column(nullable = false)
@@ -39,19 +39,16 @@ public class UserModel implements UserDetails {
   @NotBlank
   private String nome;
 
+  @NotBlank
   private String regiao;
-
-  private String idade;
 
   @NotNull
   private int cnpjoucpf;
 
-  private String telefone;
-
   private String imagem;
 
   @ManyToMany
-  @JoinTable(name = "TB_USER_ROLES", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+  @JoinTable(name = "TB_EMPRESA_ROLES", joinColumns = @JoinColumn(name = "empresa_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
   private List<RoleModel> roles;
 
   @Override
@@ -83,24 +80,8 @@ public class UserModel implements UserDetails {
     this.regiao = regiao;
   }
 
-  public String getIdade() {
-    return idade;
-  }
-
-  public void setIdade(String idade) {
-    this.idade = idade;
-  }
-
-  public int getUserId() {
-    return userId;
-  }
-
-  public String getTelefone() {
-    return telefone;
-  }
-
-  public void setTelefone(String telefone) {
-    this.telefone = telefone;
+  public int getEmpresaId() {
+    return empresaId;
   }
 
   public int getCnpjoucpf() {
@@ -111,8 +92,8 @@ public class UserModel implements UserDetails {
     this.cnpjoucpf = cnpjoucpf;
   }
 
-  public void setUserId(int userId) {
-    this.userId = userId;
+  public void setEmpresaId(int empresaId) {
+    this.empresaId = empresaId;
   }
 
   public void setUsername(String username) {

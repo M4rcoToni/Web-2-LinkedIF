@@ -2,12 +2,12 @@ package com.example.linkif.services;
 
 import java.util.List;
 
-import com.example.linkif.model.Vaga;
+import com.example.linkif.model.VagaModel;
 
 public interface VagaServices {
-	List<Vaga> findAll();
+	List<VagaModel> findAll();
 
 	// Vaga findById(int id);
 
-	// Vaga save(Vaga categoria);
+	VagaModel save(VagaModel vaga);
 }

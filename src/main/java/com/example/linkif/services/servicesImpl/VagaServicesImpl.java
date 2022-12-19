@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.linkif.model.Vaga;
+import com.example.linkif.model.VagaModel;
 import com.example.linkif.repository.VagaRepository;
 import com.example.linkif.services.VagaServices;
 
@@ -15,8 +15,14 @@ public class VagaServicesImpl implements VagaServices {
 	VagaRepository repository;
 
 	@Override
-	public List<Vaga> findAll() {
+	public List<VagaModel> findAll() {
 		return repository.findAll();
+	}
+
+	@Override
+	public VagaModel save(VagaModel vaga) {
+
+		return repository.save(vaga);
 	}
 
 	// @Override

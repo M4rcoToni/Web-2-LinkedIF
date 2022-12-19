@@ -7,12 +7,7 @@
   <meta name="pageKey" content="d_homepage-guest-home">
   <!---->
   <meta name="locale" content="en_US">
-  <meta id="config" data-app-version="2.1.456" data-call-tree-id="AAXvgNp4lothMHdCra1izg=="
-    data-jet-tags="guest-homepage" data-multiproduct-name="homepage-guest-frontend"
-    data-service-name="homepage-guest-frontend" data-browser-id="75887441-9d01-4b63-8bd5-c773aa9a3537"
-    data-enable-page-view-heartbeat-tracking data-disable-comscore-tracking
-    data-page-instance="urn:li:page:d_homepage-guest-home;Ci1goNIXT66gy2XpxSHtbg=="
-    data-disable-jsbeacon-pagekey-suffix="false" data-member-id="0">
+
 
   <link rel="canonical" href="https://www.linkedin.com/">
 
@@ -53,53 +48,8 @@
 
 <body dir="ltr">
 
+  <nav th:replace="~{/components/navHome :: navhome}"></nav>
 
-  <nav class="nav pt-1.5 pb-2 flex items-center justify-between relative flex-nowrap babybear:flex-wrap babybear:py-1.5
-    " aria-label="Primary">
-
-    <!---->
-    <a th:href="@{/login}" class="nav__logo-link link-no-visited-state z-1 mr-auto babybear:z-0 babybear:mr-0 babybear:flex-1 hover:no-underline focus:no-underline active:no-underline
-      " data-tracking-control-name="guest_homepage-basic_nav-header-logo" data-tracking-will-navigate>
-
-
-      <span class="sr-only">LinkedIF</span>
-      <!-- IMGAGEM DO LOGO-->
-      <img
-        th:src="@{https://github.com/M4rcoToni/Web-2-LinkedIF/blob/master/src/main/resources/static/img/logo.png?raw=true}"
-        alt="" width="150">
-      <ul
-        class="top-nav-menu flex items-center nav__menu order-3 after:up-down-divider after:!h-[37px] mr-0.5 babybear:hidden mamabear:hidden">
-        <li class="mr-2">
-
-          <a th:href="@{/vagas}" data-tracking-control-name="guest_homepage-basic_guest_nav_menu_jobs"
-            data-tracking-will-navigate class="top-nav-link flex justify-center items-center h-[52px] hover:text-color-text visited:hover:text-color-text hover:no-underline
-            w-[64px] flex-col mx-1 text-color-text-low-emphasis visited:text-color-text-low-emphasis">
-            <icon class="top-nav-link__icon flex h-3 w-3 flex-shrink-0 "
-              data-delayed-url="https://static.licdn.com/aero-v1/sc/h/92eb1xekc34eklevj0io6x4ki">
-            </icon>
-            <span class="top-nav-link__label-text font-sans text-sm leading-regular text-center font-regular">
-              Vagas
-            </span>
-          </a>
-
-        </li>
-      </ul>
-
-
-      <div class="nav__cta-container order-3 flex gap-x-1 justify-end min-w-[100px] flex-nowrap flex-shrink-0 babybear:flex-wrap flex-2
-      ">
-        <a class="nav__button-tertiary btn-md btn-tertiary" th:href="@{/cadastro}"
-          data-tracking-control-name="guest_homepage-basic_nav-header-join" data-tracking-will-navigate>
-          Cadastre-se
-        </a>
-        <button class="nav__button-sucess btn-md btn btn-outline-success" href=""
-          data-tracking-control-name="guest_homepage-basic_nav-header-signin" data-tracking-will-navigate>
-          Entrar
-        </button>
-
-      </div>
-
-  </nav>
 
   <main class="flex flex-col items-center overflow-hidden min-h-[calc(100vh-76px-50px)]" role="main" id="main-content">
 
@@ -168,8 +118,8 @@
         </div>
 
         <a class="sign-in-form__join-cta btn-lg btn-secondary w-column babybear:w-full block mb-3"
-          href="https://www.linkedin.com/signup/cold-join"
-          data-tracking-control-name="homepage-basic_sign-in-form_join-cta" data-tracking-will-navigate>
+          th:href="@{/cadastro/user}" data-tracking-control-name="homepage-basic_sign-in-form_join-cta"
+          data-tracking-will-navigate>
           Novo aqui? Cadastre-se
         </a>
 
@@ -203,33 +153,18 @@
       <div class="w-full papabear:max-w-[calc(theme('spacing.content-max-w')-theme('spacing.column')-72px)]">
 
 
-
-
-
-
-
         <h2 class="etta-caps-header mb-[20px]">
           TÓPICOS DE CONTEÚDO
         </h2>
 
-
-
-
-
         <ul class="show-more-less__list show-more-less__list--no-hidden-elems"
           data-impression-id="homepage-basic_explore-content_pill-list-module_etta-show-more-less_show-more-less">
-
-
-
           <li class="explore-content__pill">
-
             <button class="btn-lg mb-1.5 mr-[6px] flex items-center w-max float-left  btn btn-outline-success" href="">
               Ver todos os tópicos
             </button>
-
           </li>
           <li class="explore-content__pill">
-
             <a class="btn-lg mb-1.5 mr-[6px] flex items-center w-max float-left btn-secondary"
               data-tracking-control-name="homepage-basic_explore-content_topic-pill" data-tracking-will-navigate
               href="">
@@ -310,38 +245,7 @@
     </section>
 
 
-    <footer class="li-footer bg-transparent w-full  ">
-      <ul
-        class="text-center li-footer__list flex flex-wrap flex-row justify-center w-full h-auto min-h-[50px] my-[0px] mx-auto py-3 px-2 papabear:w-[1128px] papabear:p-0">
-
-        <li
-          class="li-footer__item font-sans text-xs text-color-text-low-emphasis flex flex-shrink-0 justify-start p-1 relative w-50% papabear:justify-center papabear:w-auto">
-
-          <span class="sr-only">LinkedIn</span>
-          <img class="li-footer__copy-logo text-color-logo-brand-alt inline-block self-center h-[14px] w-[56px] mr-1"
-            data-delayed-url="https://github.com/M4rcoToni/Web-2-LinkedIF/blob/master/src/main/resources/static/img/logo.png?raw=true"></img>
-          <span class="li-footer__copy-text flex items-center">&copy; 2022</span>
-
-        </li>
-
-
-        <li
-          class="li-footer__item font-sans text-xs text-color-text-low-emphasis flex flex-shrink-0 justify-start p-1 relative w-50% papabear:justify-center papabear:w-auto">
-          <a class="li-footer__item-link flex items-center font-sans text-xs font-bold text-color-text-low-emphasis hover:text-color-link-hover focus:text-color-link-focus"
-            href="https://about.linkedin.com?trk=homepage-basic_footer-about"
-            data-tracking-control-name="homepage-basic_footer-about" data-tracking-will-navigate>
-
-            About
-
-          </a>
-        </li>
-
-
-
-      </ul>
-
-      <!---->
-    </footer>
+    <footer th:replace="~{/components/footer :: footer}"></footer>
 
 
     <script src="https://static.licdn.com/aero-v1/sc/h/9q42psw84tv933tbvwqoe327v" async defer></script>
@@ -352,7 +256,15 @@
     <script data-delayed-url="https://static.licdn.com/aero-v1/sc/h/98lptr8kagfxge22q7k1fps8"
       data-module-id="google-one-tap-lib"></script>
 
-
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"></script>
     <script src="https://static.licdn.com/aero-v1/sc/h/7dzsoyz1bsr7e64b321m3tjgi" async></script>
 
 </body>

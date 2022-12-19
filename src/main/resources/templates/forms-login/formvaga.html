@@ -1,0 +1,43 @@
+<div>
+
+  <form class="sign-in-form hero-cta-form" method="post" novalidate data-js-module-id="d2l-sign-in-form"
+    th:fragment="formvaga">
+    <div class="sign-in-form__form-input-container">
+      <!-- INPUTS DE EMPRESA -->
+      <div class="input  mx-auto">
+        <div class="input">
+          <input class="input__input" required="true" id="titulo" name="titulo" placeholder=" " type="text">
+          <label class="input__label" for="titulo">Titulo da Vaga</label>
+        </div>
+        <div class="input ">
+          <input class="input__input" required="true" id="salario" name="salario" placeholder=" " type="text">
+          <label class="input__label" for="salario">Salario</label>
+        </div>
+        <div class="input ">
+          <input class="input__input" required="true" id="regiao" name="regiao" placeholder=" " type="text">
+          <label class="input__label" for="regiao">Região</label>
+        </div>
+        <div class="input ">
+          <input class="input__input" required="true" id="descricao" name="descricao" placeholder=" " type="text">
+          <label class="input__label" for="descricao">Adicione uma descrição</label>
+        </div>
+        <div class="input ">
+          <select id="tipo" name="tipo" class="input__input ">
+            <option value="">Selecione o Tipo da Vaga</option>
+            <option value="1">Tempo Integral</option>
+            <option value="2">Meio período</option>
+            <option value="3">Freelancer</option>
+          </select>
+
+        </div>
+      </div>
+    </div>
+
+    <div class=" mt-4 d-grid gap-2 ">
+      <button class="btn-lg btn btn-success" type="submit">
+        Cadastrar Vaga
+      </button>
+    </div>
+
+  </form>
+</div>

@@ -13,8 +13,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "Vaga")
-public class Vaga {
+@Table(name = "TB_VAGA")
+public class VagaModel {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
@@ -28,11 +28,53 @@ public class Vaga {
   @NotBlank
   private String descricao;
 
+  @NotBlank
+  private String regiao;
+
   @NotNull
   private int tipo;
 
-  @NotNull
-  private int vagaId;
+  private String empresaName;
+
+  public int getId() {
+    return id;
+  }
+
+  public void setId(int id) {
+    this.id = id;
+  }
+
+  public String getTitulo() {
+    return titulo;
+  }
+
+  public void setTitulo(String titulo) {
+    this.titulo = titulo;
+  }
+
+  public String getSalario() {
+    return salario;
+  }
+
+  public String getRegiao() {
+    return regiao;
+  }
+
+  public void setRegiao(String regiao) {
+    this.regiao = regiao;
+  }
+
+  public void setSalario(String salario) {
+    this.salario = salario;
+  }
+
+  public String getDescricao() {
+    return descricao;
+  }
+
+  public void setDescricao(String descricao) {
+    this.descricao = descricao;
+  }
 
   public String gettitulo() {
     return titulo;
@@ -50,12 +92,12 @@ public class Vaga {
     this.tipo = tipo;
   }
 
-  public int getVagaId() {
-    return vagaId;
+  public String getEmpresaName() {
+    return empresaName;
   }
 
-  public void setVagaId(int vagaId) {
-    this.vagaId = vagaId;
+  public void setEmpresaName(String empresaName) {
+    this.empresaName = empresaName;
   }
 
 }
