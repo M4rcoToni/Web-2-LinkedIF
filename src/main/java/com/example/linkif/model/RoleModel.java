@@ -1,7 +1,6 @@
 package com.example.linkif.model;
 
 import java.io.Serializable;
-import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,7 +22,7 @@ public class RoleModel implements GrantedAuthority, Serializable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  private UUID roleId;
+  private int roleId;
 
   @Enumerated(EnumType.STRING)
   @Column(nullable = false, unique = true)
@@ -34,11 +33,11 @@ public class RoleModel implements GrantedAuthority, Serializable {
     return this.roleName.toString();
   }
 
-  public UUID getRoleId() {
+  public int getRoleId() {
     return roleId;
   }
 
-  public void setRoleId(UUID roleId) {
+  public void setRoleId(int roleId) {
     this.roleId = roleId;
   }
 

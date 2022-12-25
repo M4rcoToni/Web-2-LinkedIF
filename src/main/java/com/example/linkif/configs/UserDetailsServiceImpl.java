@@ -1,15 +1,12 @@
 package com.example.linkif.configs;
 
+import java.util.Optional;
 import javax.transaction.Transactional;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.linkif.model.EmpresaModel;
@@ -32,18 +29,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    EmpresaModel EmpresaModel = empresaRepository.findByUsername(username)
-        .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + username));
-    System.out.println(username);
+    Optional<EmpresaModel> EmpresaModel = empresaRepository.findByUsername(username);
 
-    if (EmpresaModel.getUsername() == null) {
-      throw new UsernameNotFoundException("Usuario não encontrado!");
-    } else if (EmpresaModel.getUsername() != null) {
-      // System.out.println("///////////" + EmpresaModel.getUsername());
-      // System.out.println("///////////" + EmpresaModel.getPassword());
-      // System.out.println("///////////" + EmpresaModel.getAuthorities());
-      return new User(EmpresaModel.getUsername(), EmpresaModel.getPassword(), true, true, true, true,
-          EmpresaModel.getAuthorities());
+    if (!EmpresaModel.isEmpty()) {
+      return new User(EmpresaModel.get().getUsername(), EmpresaModel.get().getPassword(), true,
+          true, true, true,
+          EmpresaModel.get().getAuthorities());
     }
 
     UserModel userModel = userRepository.findByUsername(username)
@@ -52,13 +43,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     if (userModel.getUsername() == null) {
       throw new UsernameNotFoundException("Usuario não encontrado!");
     }
-    // System.out.println("///////////" + userModel.getUsername());
-    // System.out.println("///////////" + userModel.getPassword());
-    // System.out.println("///////////" + userModel.getAuthorities());
+
     return new User(userModel.getUsername(), userModel.getPassword(), true, true,
         true, true,
         userModel.getAuthorities());
 
   }
-
 }

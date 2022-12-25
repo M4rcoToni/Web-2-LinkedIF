@@ -1,6 +1,7 @@
 package com.example.linkif.services.servicesImpl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,34 +26,25 @@ public class VagaServicesImpl implements VagaServices {
 		return repository.save(vaga);
 	}
 
-	// @Override
-	// public Vaga findById(int id) {
-	// // TODO Auto-generated method stub
-	// return null;
-	// }
+	@Override
+	public Optional<VagaModel> findById(Integer id) {
+		return repository.findById(id);
+	}
 
-	// @Override
-	// public Vaga save(Vaga categoria) {
-	// // TODO Auto-generated method stub
-	// return null;
-	// }
-	// @Autowired
-	// RepositoryVaga repository;
+	@Override
+	public List<VagaModel> findByTipoLike(int tipo) {
+		return repository.findByTipoLike(tipo);
+	}
 
-	// @Override
-	// public List<Categorias> findAll() {
-	// return repository.findAll();
-	// }
+	@Override
+	public List<VagaModel> findByempresaNameLike(String empresaName) {
+		return repository.findByempresaNameLike(empresaName);
+	}
 
-	// @Override
-	// public Categorias findById(int id) {
-	// // TODO Auto-generated method stub
-	// return null;
-	// }
+	@Override
+	public List<VagaModel> findByusersNamesLike(String user) {
 
-	// @Override
-	// public Categorias save(Categorias categoria) {
-	// // TODO Auto-generated method stub
-	// return null;
-	// }
+		return repository.findByusersNamesLike(user);
+	}
+
 }

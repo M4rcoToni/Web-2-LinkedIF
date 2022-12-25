@@ -3,34 +3,21 @@ package com.example.linkif.controller;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-
 import java.nio.file.Path;
-
 import java.nio.file.Paths;
-
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import javax.persistence.Query;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-// import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.WebAttributes;
-import org.springframework.validation.BindingResult;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -40,15 +27,12 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.example.linkif.repository.VagaRepository;
 import com.example.linkif.model.EmpresaModel;
 import com.example.linkif.model.UserModel;
 import com.example.linkif.model.VagaModel;
 import com.example.linkif.repository.EmpresaRepository;
 import com.example.linkif.repository.UserRepository;
-import com.fasterxml.jackson.databind.introspect.TypeResolutionContext.Empty;
-
-import net.bytebuddy.dynamic.loading.PackageDefinitionStrategy.Definition.Undefined;
+import com.example.linkif.repository.VagaRepository;
 
 @Controller
 public class ControllerLinkif {
@@ -64,11 +48,140 @@ public class ControllerLinkif {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView Login() {
         ModelAndView mv = new ModelAndView("home");
+        return mv;
+    }
 
-        // List<Categorias> categorias = repositoryCar.findAll();
-        // mv.addObject("categorias", categorias);
+    @RequestMapping(value = "/empresa/candidatos/{id}", method = RequestMethod.GET)
+    public ModelAndView EmpresaCandidatos(@PathVariable("id") int id,
+            RedirectAttributes attributes) {
+        System.out.println("EMPREASA CANDIDATA ");
+        ModelAndView mv = new ModelAndView("candidatosEmpresa");
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String empresaName = auth.getName().toString();
+        Optional<VagaModel> vaga = repositoryVaga.findById(id);
+        List<UserModel> vagaUsers = new ArrayList<UserModel>();
+        List<String> users = vaga.get().getUsersNames();
+        for (String user : users) {
+            Optional<UserModel> u = repositoryUser.findByUsername(user);
+            vagaUsers.add(u.get());
+        }
+
+        mv.addObject("users", vagaUsers);
+        Optional<EmpresaModel> empresa = repositoryEmpresa.findByUsername(empresaName);
+
+        mv.addObject("username", empresaName);
+        mv.addObject("imagem", empresa.get().getImagem());
+        return mv;
+    }
+
+    @RequestMapping(value = "/vagas/candidata/{id}", method = RequestMethod.GET)
+    public String Candidata(@PathVariable("id") int id,
+            RedirectAttributes attributes) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String email = auth.getName().toString();
+        repositoryVaga.insertIntoVagaUsersNames(id, email);
+
+        return "redirect:/vagas";
+    }
+
+    @RequestMapping(value = "/vagas/minhasvagas/{id}", method = RequestMethod.GET)
+    public ModelAndView VagasCandidatadas(@PathVariable("id") int id,
+            RedirectAttributes attributes) {
+        ModelAndView mv = new ModelAndView("userVagas");
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName().toString();
+        Optional<UserModel> user = repositoryUser.findByUsername(username);
+        mv.addObject("imagem", user.get().getImagem());
+        mv.addObject("userId", user.get().getUserId());
+
+        List<VagaModel> vagas = repositoryVaga.findByusersNamesLike(username);
+        mv.addObject("vagas", vagas);
 
         return mv;
+    }
+
+    @RequestMapping(value = "/vagas/pesquisar", method = RequestMethod.POST)
+    public ModelAndView getTipoAndEmpresa(
+            @RequestParam("tipo") int tipo,
+            @RequestParam("nomeEmpresa") String emp) throws IOException {
+
+        ModelAndView mv = new ModelAndView("vagas");
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String empresaName = auth.getName().toString();
+
+        Optional<EmpresaModel> empresa = repositoryEmpresa.findByUsername(empresaName);
+        Optional<UserModel> user = repositoryUser.findByUsername(empresaName);
+        boolean empresaauth = false;
+        boolean userauth = false;
+        boolean nonauth = false;
+
+        if (empresaName.equals("anonymousUser")) {
+            nonauth = true;
+            mv.addObject("nonauth", nonauth);
+
+        } else {
+            if (!empresa.isEmpty()) {
+                empresaauth = true;
+                mv.addObject("empresaauth", empresaauth);
+                mv.addObject("imagem", empresa.get().getImagem());
+            } else {
+                userauth = true;
+                mv.addObject("userauth", userauth);
+                mv.addObject("userId", user.get().getUserId());
+                mv.addObject("imagem", user.get().getImagem());
+            }
+        }
+
+        mv.addObject("username", empresaName);
+
+        if (tipo > 0) {
+            List<VagaModel> vaga = repositoryVaga.findByTipoLike(tipo);
+            mv.addObject("vagas", vaga);
+        }
+        if (emp != "") {
+            String name = emp;
+            List<VagaModel> empresaname = repositoryVaga.findByempresaNameLike(name);
+            mv.addObject("vagas", empresaname);
+        }
+
+        return mv;
+    }
+
+    @RequestMapping(value = "/empresa/delete/{id}", method = RequestMethod.GET)
+    public String deletePostagens(@PathVariable("id") int id, RedirectAttributes attributes) {
+        repositoryVaga.deleteById(id);
+        attributes.addFlashAttribute("mensagem", "Deletado com sucesso");
+        return "redirect:/vagas";
+    }
+
+    @RequestMapping(value = "/empresa/{username}", method = RequestMethod.GET)
+    public ModelAndView EmpresaVagas(@PathVariable("username") String empresaName) {
+        ModelAndView mv = new ModelAndView("empresaVagas");
+        Optional<EmpresaModel> empresa = repositoryEmpresa.findByUsername(empresaName);
+
+        List<VagaModel> vagas = repositoryVaga.findAll();
+        List<VagaModel> vagasdaEmpresa = new ArrayList<>();
+        for (VagaModel vaga : vagas) {
+            if (vaga.getEmpresaName().equals(empresa.get().getNome())) {
+                vagasdaEmpresa.add(vaga);
+            }
+        }
+
+        mv.addObject("imagem", empresa.get().getImagem());
+        mv.addObject("vagas", vagasdaEmpresa);
+
+        return mv;
+    }
+
+    @RequestMapping(value = "/empresa/{id}", method = RequestMethod.POST)
+    public String EmpresaAtivaVaga(@PathVariable("id") int id,
+            RedirectAttributes attributes) {
+        Optional<VagaModel> vaga = repositoryVaga.findById(id);
+
+        repositoryVaga.upadteTbVagasStatus(id, !vaga.get().isStatus());
+        return "redirect:/vagas";
     }
 
     @RequestMapping(value = "/vagas", method = RequestMethod.GET)
@@ -78,13 +191,33 @@ public class ControllerLinkif {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String empresaName = auth.getName().toString();
-        boolean authenticated;
+
+        Optional<EmpresaModel> empresa = repositoryEmpresa.findByUsername(empresaName);
+        Optional<UserModel> user = repositoryUser.findByUsername(empresaName);
+
+        boolean empresaauth = false;
+        boolean userauth = false;
+        boolean nonauth = false;
+
         if (empresaName.equals("anonymousUser")) {
-            authenticated = false;
+            nonauth = true;
+            mv.addObject("nonauth", nonauth);
+
         } else {
-            authenticated = true;
+            if (!empresa.isEmpty()) {
+                empresaauth = true;
+                mv.addObject("empresaauth", empresaauth);
+                mv.addObject("imagem", empresa.get().getImagem());
+            } else {
+                userauth = true;
+                mv.addObject("userauth", userauth);
+                mv.addObject("imagem", user.get().getImagem());
+                mv.addObject("userId", user.get().getUserId());
+            }
         }
-        mv.addObject("authenticated", authenticated);
+
+        mv.addObject("username", empresaName);
+
         mv.addObject("vagas", vagas);
         return mv;
     }
@@ -92,15 +225,46 @@ public class ControllerLinkif {
     @RequestMapping(value = "/vagas/{id}", method = RequestMethod.GET)
     public ModelAndView getVagaDetails(@PathVariable("id") int id) {
         ModelAndView mv = new ModelAndView("vagas");
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String empresaName = auth.getName().toString();
+        Optional<EmpresaModel> empresa = repositoryEmpresa.findByUsername(empresaName);
+        Optional<UserModel> user = repositoryUser.findByUsername(empresaName);
+
+        boolean empresaauth = false;
+        boolean userauth = false;
+        boolean nonauth = false;
+
+        if (empresaName.equals("anonymousUser")) {
+            nonauth = true;
+            mv.addObject("nonauth", nonauth);
+
+        } else {
+            if (!empresa.isEmpty()) {
+                empresaauth = true;
+                mv.addObject("empresaauth", empresaauth);
+                mv.addObject("imagem", empresa.get().getImagem());
+
+            } else {
+                userauth = true;
+                mv.addObject("userauth", userauth);
+                mv.addObject("imagem", user.get().getImagem());
+                mv.addObject("userId", user.get().getUserId());
+
+            }
+        }
+
         List<VagaModel> vagas = repositoryVaga.findAll();
         Optional<VagaModel> vaga = repositoryVaga.findById(id);
-
+        mv.addObject("vagaid", vaga.get().getId());
         mv.addObject("titulo", vaga.get().getTitulo());
         mv.addObject("empresa", vaga.get().getEmpresaName());
         mv.addObject("regiao", vaga.get().getRegiao());
         mv.addObject("salario", vaga.get().getSalario());
+        mv.addObject("status", vaga.get().isStatus());
         mv.addObject("descricao", vaga.get().getDescricao());
         mv.addObject("tipo", vaga.get().getTipo());
+        mv.addObject("username", empresaName);
 
         mv.addObject("vagas", vagas);
         return mv;
@@ -110,6 +274,20 @@ public class ControllerLinkif {
     public ModelAndView cadastraVaga() {
         ModelAndView mv = new ModelAndView("cadastroVaga");
 
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String empresaName = auth.getName().toString();
+        boolean authenticated;
+        if (empresaName.equals("anonymousUser")) {
+            authenticated = false;
+        } else {
+            authenticated = true;
+        }
+        Optional<EmpresaModel> empresa = repositoryEmpresa.findByUsername(empresaName);
+
+        mv.addObject("imagem", empresa.get().getImagem());
+        mv.addObject("username", empresaName);
+        mv.addObject("authenticated", authenticated);
+
         return mv;
     }
 
@@ -117,16 +295,16 @@ public class ControllerLinkif {
     public String saveVaga(@Valid VagaModel vaga, BindingResult result,
             RedirectAttributes attributes) {
         if (result.hasErrors()) {
-            System.out.println(result);
             attributes.addFlashAttribute("mensagem", "Verifique os campos!");
             return "redirect:/cadastro";
-
         }
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String empresaName = auth.getName().toString();
-
-        vaga.setEmpresaName(empresaName);
+        vaga.setStatus(true);
+        Optional<EmpresaModel> empresa = repositoryEmpresa.findByUsername(empresaName);
+        vaga.setEmpresaName(empresa.get().getNome());
+        vaga.setEmpresaImagem(empresa.get().getImagem());
 
         repositoryVaga.save(vaga);
         return "redirect:/vagas";
@@ -135,9 +313,6 @@ public class ControllerLinkif {
     @RequestMapping(value = "/cadastro/user", method = RequestMethod.GET)
     public ModelAndView Cadastro() {
         ModelAndView mv = new ModelAndView("cadastroUser");
-        // List<Categorias> categorias = repositoryCar.findAll();
-        // mv.addObject("categorias", categorias);
-
         return mv;
     }
 
@@ -145,7 +320,6 @@ public class ControllerLinkif {
     public String saveEmpresa(@Valid UserModel user, BindingResult result, RedirectAttributes attributes,
             @RequestParam("file") MultipartFile imagem) {
         if (result.hasErrors()) {
-            System.out.println(result);
             attributes.addFlashAttribute("mensagem", "Verifique os campos!");
             return "redirect:/cadastro";
 
@@ -176,13 +350,14 @@ public class ControllerLinkif {
         user.setPassword(ecode);
 
         user.setRole_id(11);
-
         user.setCnpjoucpf(cnpjoucpf);
         repositoryUser.save(user);
+        try {
+            repositoryUser.insertIntoTbUsers(user.getUserId(), user.getRole_id());
 
-        repositoryUser.insertIntoTbUsers(user.getUserId(), user.getRole_id());
-
-        System.out.println(user.getUserId());
+        } catch (Exception e) {
+            System.out.println("ERRO USER" + e);
+        }
 
         return "redirect:/login";
     }
@@ -190,9 +365,6 @@ public class ControllerLinkif {
     @RequestMapping(value = "/cadastro/empresa", method = RequestMethod.GET)
     public ModelAndView CadastroEmpresa() {
         ModelAndView mv = new ModelAndView("cadastroEmpresa");
-        // List<Categorias> categorias = repositoryCar.findAll();
-        // mv.addObject("categorias", categorias);
-
         return mv;
     }
 
@@ -200,7 +372,6 @@ public class ControllerLinkif {
     public String saveEmpresa(@Valid EmpresaModel empresa, BindingResult result, RedirectAttributes attributes,
             @RequestParam("file") MultipartFile imagem) {
         if (result.hasErrors()) {
-            System.out.println(result);
             attributes.addFlashAttribute("mensagem", "Verifique os campos!");
             return "redirect:/cadastro";
 
@@ -237,145 +408,18 @@ public class ControllerLinkif {
 
         repositoryEmpresa.insertIntoTbUsers(empresa.getEmpresaId(), empresa.getRole_id());
 
-        System.out.println(empresa.getEmpresaId());
-
         return "redirect:/login";
     }
 
-    @RequestMapping(value = "/index", method = RequestMethod.GET)
-    public ModelAndView getIndex() {
-        ModelAndView mv = new ModelAndView("index");
+    @RequestMapping(value = "/img/{imagem}", method = RequestMethod.GET)
+    @ResponseBody
+    public byte[] getImagem(@PathVariable("imagem") String imagem) throws IOException {
+        File imagemArquivo = new File("./src/main/resources/static/img/" + imagem);
+        if (imagem != null || imagem.trim().length() > 0) {
+            return Files.readAllBytes(imagemArquivo.toPath());
+        }
+        return null;
 
-        return mv;
     }
-
-    // // @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
-    // @RequestMapping(value = "/index", method = RequestMethod.GET)
-    // public ModelAndView getGetCategoria() {
-    // ModelAndView mv = new ModelAndView("index");
-
-    // List<Categorias> categorias = repositoryCar.findAll();
-    // mv.addObject("categorias", categorias);
-
-    // List<Veiculos> veiculos = repositoryVe.findAll();
-    // mv.addObject("veiculos", veiculos);
-
-    // return mv;
-    // }
-
-    // // @PreAuthorize("hasRole('ROLE_USER')")
-    // @RequestMapping(value = "/veiculos/{id}", method = RequestMethod.GET)
-    // public ModelAndView getVeiculo(@PathVariable("id") int id) {
-    // ModelAndView mv = new ModelAndView("veiculo");
-    // List<Categorias> categorias = repositoryCar.findAll();
-    // Optional<Veiculos> veiculo = repositoryVe.findById(id);
-    // mv.addObject("id", veiculo.get().getId());
-    // mv.addObject("placa", veiculo.get().getPlaca());
-    // mv.addObject("cor", veiculo.get().getCor());
-    // mv.addObject("modelo", veiculo.get().getModelo());
-    // mv.addObject("marca", veiculo.get().getMarca());
-    // mv.addObject("preco", veiculo.get().getPreco());
-    // mv.addObject("ano", veiculo.get().getAno());
-    // mv.addObject("imagem", veiculo.get().getImagem());
-    // mv.addObject("categoria", veiculo.get().getcategoria());
-
-    // mv.addObject("categorias", categorias);
-    // return mv;
-    // }
-
-    // // @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
-    // @RequestMapping(value = "/save", method = RequestMethod.GET)
-    // public ModelAndView save() {
-    // ModelAndView mv = new ModelAndView("formulario");
-
-    // List<Categorias> categorias = repositoryCar.findAll();
-    // mv.addObject("categorias", categorias);
-
-    // return mv;
-    // }
-
-    // // @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
-    // @RequestMapping(value = "/save", method = RequestMethod.POST)
-    // public String savePost(@Valid Veiculos veiculo, BindingResult result,
-    // RedirectAttributes attributes,
-    // @RequestParam("file") MultipartFile imagem) {
-    // if (result.hasErrors()) {
-    // System.out.println(result);
-    // attributes.addFlashAttribute("mensagem", "Verifique os campos!");
-    // return "redirect:/save";
-
-    // }
-    // try {
-    // if (!imagem.isEmpty()) {
-    // byte[] bytes = imagem.getBytes();
-    // String nomeImagem = LocalDate.now() + imagem.getOriginalFilename();
-    // Path caminho = Paths.get("./src/main/resources/static/img/" + nomeImagem);
-    // Files.write(caminho, bytes);
-    // veiculo.setImagem(nomeImagem);
-    // }
-    // } catch (IOException e) {
-    // System.out.println("ERRO NA IMAGEM" + e);
-    // }
-    // System.out.println("////////////////////////" + veiculo.getcategoria());
-    // repositoryVe.save(veiculo);
-    // return "redirect:/index";
-    // }
-
-    // @RequestMapping(value = "/img/{imagem}", method = RequestMethod.GET)
-    // @ResponseBody
-    // public byte[] getImagem(@PathVariable("imagem") String imagem) throws
-    // IOException {
-    // File imagemArquivo = new File("./src/main/resources/static/img/" + imagem);
-    // if (imagem != null || imagem.trim().length() > 0) {
-    // return Files.readAllBytes(imagemArquivo.toPath());
-    // }
-    // return null;
-
-    // }
-
-    // // @RequestMapping(value = "/Veiculos/delete/{id}", method =
-    // RequestMethod.GET)
-    // // public String deleteVeiculos(@PathVariable("id")int id, RedirectAttributes
-    // // attributes) {
-    // // RepositoryIfcar.deleteById(id);
-    // // attributes.addFlashAttribute("mensagem", "Deletado com sucesso");
-    // // return "redirect:/Veiculos";
-    // // }
-    // @RequestMapping(value = "/modelos", method = RequestMethod.POST)
-    // public ModelAndView getVeiculosByModeloLike(
-    // @RequestParam("pesquisar") String buscar,
-    // @RequestParam("ano") String ano) throws IOException {
-
-    // ModelAndView mv = new ModelAndView("index");
-    // if (buscar != "") {
-    // List<Veiculos> modelo = repositoryVe.findVeiculosByModeloLike(buscar);
-    // System.out.println("modelo" + buscar);
-    // mv.addObject("veiculos", modelo);
-    // }
-    // if (ano != "") {
-    // int realano = Integer.parseInt(ano);
-    // List<Veiculos> vano = repositoryVe.findVeiculosByAnoLike(realano);
-    // System.out.println("ano" + realano);
-    // mv.addObject("veiculos", vano);
-    // }
-
-    // List<Categorias> categorias = repositoryCar.findAll();
-    // mv.addObject("categorias", categorias);
-
-    // return mv;
-    // }
-
-    // @RequestMapping(value = "/index/categorias/{categoria}", method =
-    // RequestMethod.GET)
-    // public ModelAndView getVeiculoByCategoria(@PathVariable("categoria") int
-    // categoria) {
-    // ModelAndView mv = new ModelAndView("index");
-    // List<Veiculos> veiculo = repositoryVe.findVeiculosBycategoriaLike(categoria);
-    // mv.addObject("veiculos", veiculo);
-
-    // List<Categorias> categorias = repositoryCar.findAll();
-    // mv.addObject("categorias", categorias);
-    // return mv;
-    // }
 
 }

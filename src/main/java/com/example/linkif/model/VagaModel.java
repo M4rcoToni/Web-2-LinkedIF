@@ -1,13 +1,12 @@
 package com.example.linkif.model;
 
-import javax.persistence.Column;
+import java.util.List;
+
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -35,6 +34,37 @@ public class VagaModel {
   private int tipo;
 
   private String empresaName;
+
+  private String empresaImagem;
+
+  private boolean status;
+
+  @ElementCollection
+  private List<String> usersNames;
+
+  public String getEmpresaImagem() {
+    return empresaImagem;
+  }
+
+  public void setEmpresaImagem(String empresaImagem) {
+    this.empresaImagem = empresaImagem;
+  }
+
+  public List<String> getUsersNames() {
+    return usersNames;
+  }
+
+  public void setUsersNames(List<String> usersNames) {
+    this.usersNames = usersNames;
+  }
+
+  public boolean isStatus() {
+    return status;
+  }
+
+  public void setStatus(boolean status) {
+    this.status = status;
+  }
 
   public int getId() {
     return id;

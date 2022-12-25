@@ -11,12 +11,6 @@ public interface UsersServices {
 
 	UserModel save(UserModel user);
 
-	List<UserModel> findUsersByModeloLike(String modelo);
-
-	List<UserModel> findUsersByAnoLike(int ano);
-
-	List<UserModel> findUsersBycategoriaLike(int categoria);
-
 	Integer insertIntoTbUsers(Integer id, Integer role_id);
 
 }

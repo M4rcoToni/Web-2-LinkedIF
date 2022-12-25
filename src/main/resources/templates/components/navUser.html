@@ -1,6 +1,6 @@
 <!-- Navigation-->
 <nav class="nav pt-1.5 pb-2 flex items-center justify-between relative flex-nowrap 
-babybear:flex-wrap babybear:py-1.5" th:fragment="navemp" aria-label="Primary">
+babybear:flex-wrap babybear:py-1.5" th:fragment="navuser" aria-label="Primary">
 
     <!---->
     <a th:href="@{/login}" class="nav__logo-link link-no-visited-state z-1 mr-auto 
@@ -14,9 +14,36 @@ babybear:flex-wrap babybear:py-1.5" th:fragment="navemp" aria-label="Primary">
             alt="" width="150">
         <ul class="my-x top-nav-menu flex items-center nav__menu order-3 after:up-down-divider
              after:!h-[37px] mr-0.5 babybear:hidden mamabear:hidden">
+            <li>
+                <div class="dropdown">
+                    <a type="button" class="nav-link dropdown-toggle fs-3 text-decoration-none text-black"
+                        data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+                        Pesquisar por modelo
+                    </a>
+                    <form class="dropdown-menu p-4 w-100" action="/vagas/pesquisar" method="post">
+                        <div class="mb-3 ">
+                            <label for="tipo" class="form-label fs-3">Por Tipo: </label>
+                            <select id="tipo" name="tipo" class="input__input ">
+                                <option value="0">Selecione o tipo</option>
+
+                                <option value="1">Tempo Integral</option>
+                                <option value="2">Meio período</option>
+                                <option value="3">Freelancer</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="nomeEmpresa" class="form-label fs-3">Por Empresa: </label>
+                            <input type="text" class="input__input " id="nomeEmpresa" name="nomeEmpresa"
+                                placeholder="Intel..">
+                        </div>
+                        <button type="submit" class="btn  btn-md btn-success">Pesquisar</button>
+
+                    </form>
+                </div>
+            </li>
             <li class>
 
-                <a th:href="@{/empresa/{username}(username=${username})}"
+                <a th:href="@{/vagas/minhasvagas/{userId}(userId=${userId})}"
                     data-tracking-control-name="guest_homepage-basic_guest_nav_menu_jobs" data-tracking-will-navigate
                     class="top-nav-link flex justify-center items-center h-[52px] hover:text-color-text 
                     visited:hover:text-color-text hover:no-underline
@@ -34,20 +61,6 @@ babybear:flex-wrap babybear:py-1.5" th:fragment="navemp" aria-label="Primary">
                 </a>
             <li class>
 
-                <a th:href="@{/cadastro/vagas}" data-tracking-control-name="guest_homepage-basic_guest_nav_menu_jobs"
-                    data-tracking-will-navigate
-                    class="top-nav-link flex justify-center items-center h-[52px] hover:text-color-text visited:hover:text-color-text hover:no-underline w-[64px] flex-col mx-1  text-color-text-low-emphasis visited:text-color-text-low-emphasis">
-                    <icon class="top-nav-link__icon flex h-3 w-3 flex-shrink-0 "
-                        data-delayed-url="https://static.licdn.com/aero-v1/sc/h/92eb1xekc34eklevj0io6x4ki">
-                    </icon>
-                    <span class="top-nav-link__label-text font-sans text-sm leading-regular text-center font-regular">
-                        Cadastrar
-                    </span>
-                </a>
-
-            </li>
-            <li>
-
                 <a href="/vagas" data-tracking-control-name="guest_homepage-basic_guest_nav_menu_jobs"
                     data-tracking-will-navigate
                     class="top-nav-link flex justify-center items-center h-[52px] hover:text-color-text visited:hover:text-color-text hover:no-underline w-[64px] flex-col mx-1  text-color-text-low-emphasis visited:text-color-text-low-emphasis">
@@ -62,20 +75,19 @@ babybear:flex-wrap babybear:py-1.5" th:fragment="navemp" aria-label="Primary">
             </li>
             <li class="global-nav__primary-item mr-3">
                 <!---->
-                <div class="top-nav-link flex justify-center items-center h-[52px] hover:text-color-text 
+                <div class=" ">
+                    <div class="top-nav-link flex justify-center items-center h-[52px] hover:text-color-text 
                 visited:hover:text-color-text hover:no-underline
                 w-[64px] flex-col mx-1 text-color-text-low-emphasis visited:text-color-text-low-emphasis">
-                    <img width="30" th:src="@{/img/{imagem}(imagem=${imagem})}" height="30" alt="" id="ember17"
-                        class="rounded-5 ">
-                    <span class="  leading-regular text-center font-regular">
-                        Empresa
-                    </span>
+                        <img width="30" th:src="@{/img/{imagem}(imagem=${imagem})}" height="30" alt="" id="ember17"
+                            class="rounded-5 ">
+                        <span class="  leading-regular text-center font-regular">
+                            Perfil
+                        </span>
+                    </div>
                 </div>
-
-
             </li>
         </ul>
-
         <div class=" nav__cta-container order-3 flex gap-x-1 justify-end min-w-[100px] flex-nowrap flex-shrink-0
                 babybear:flex-wrap flex-2 ">
             <form class="d-flex" th:action="@{/logout}">
@@ -84,5 +96,4 @@ babybear:flex-wrap babybear:py-1.5" th:fragment="navemp" aria-label="Primary">
                 </button>
             </form>
         </div>
-
 </nav>
