@@ -16,6 +16,8 @@ O objetivo é usar o Spring Security para ter usuários que cadastrem as vagas e
 Verifique as configurações em:
  [application.properties](https://github.com/M4rcoToni/NWL-eSports-Server](https://github.com/M4rcoToni/Web-2-LinkedIF/blob/master/src/main/resources/application.properties))
 
+Ative o Xampp com MySQL
+
 ## Imagens do projeto
 
 
