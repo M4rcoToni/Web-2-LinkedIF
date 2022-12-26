@@ -1,4 +1,4 @@
-## LinkedIF
+# LinkedIF
 
 Esse projeto é meu trabalho final da Disciplina de Programação Web 2.
 O objetivo é usar o Spring Security para ter usuários que cadastrem as vagas e os que consomem como um tipo de Linkedin.
