@@ -296,7 +296,7 @@ public class ControllerLinkif {
             RedirectAttributes attributes) {
         if (result.hasErrors()) {
             attributes.addFlashAttribute("mensagem", "Verifique os campos!");
-            return "redirect:/cadastro";
+            return "redirect:/cadastro/vagas";
         }
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -321,14 +321,14 @@ public class ControllerLinkif {
             @RequestParam("file") MultipartFile imagem) {
         if (result.hasErrors()) {
             attributes.addFlashAttribute("mensagem", "Verifique os campos!");
-            return "redirect:/cadastro";
+            return "redirect:/cadastro/user";
 
         }
         List<UserModel> users = repositoryUser.findAll();
         for (UserModel userModel : users) {
             if (user.getUsername().equals(userModel.getUsername())) {
                 attributes.addFlashAttribute("mensagem", "Email já cadastrado!");
-                return "redirect:/cadastro";
+                return "redirect:/cadastro/user";
             }
         }
         try {
@@ -373,14 +373,15 @@ public class ControllerLinkif {
             @RequestParam("file") MultipartFile imagem) {
         if (result.hasErrors()) {
             attributes.addFlashAttribute("mensagem", "Verifique os campos!");
-            return "redirect:/cadastro";
+            System.out.println(result.toString());
+            return "redirect:/cadastro/empresa";
 
         }
         List<EmpresaModel> empresas = repositoryEmpresa.findAll();
         for (EmpresaModel EmpresaModel : empresas) {
             if (empresa.getUsername().equals(EmpresaModel.getUsername())) {
                 attributes.addFlashAttribute("mensagem", "Email já cadastrado!");
-                return "redirect:/cadastro";
+                return "redirect:/cadastro/empresa";
             }
         }
         try {
