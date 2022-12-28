@@ -21,6 +21,6 @@ Ative o Xampp com MySQL
 ## Imagens do projeto
 
 
-<img src="" height="550" widt="550"/>
-
+<img src="https://github.com/M4rcoToni/Web-2-LinkedIF/blob/ac59bde6b885b1f7e6141c2848e0fedbe77dd29d/src/main/resources/static/img/git/home.png" height="550" widt="550"/>
+<img src="https://github.com/M4rcoToni/Web-2-LinkedIF/blob/ac59bde6b885b1f7e6141c2848e0fedbe77dd29d/src/main/resources/static/img/git/vagas.png" height="550" widt="550"/>
 
