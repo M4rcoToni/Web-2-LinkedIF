@@ -5,7 +5,7 @@ O objetivo é usar o Spring Security para ter usuários que cadastrem as vagas e
 
 - Spring Boot 2.7.6
 - Spring Data JPA
-- Sring Security
+- Spring Security
 - Thymeleaf
 - Spring Web
 - Bootstrap
